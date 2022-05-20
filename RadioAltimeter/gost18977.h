@@ -10,14 +10,20 @@
 #define GOST18977_H_
 
 
+#define F_CPU 16000000UL
+
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define GOST18977_BOAD 100000UL
+#define GOST18977_BOAD 48000UL
+#define DDR_DATA DDRA
 #define PORT_DATA PORTA
 #define PIN_DATA_A 0
 #define PIN_DATA_B 1
 
+inline void gost18977_init() {
+	DDR_DATA |= 1<<PIN_DATA_A | 1<<PIN_DATA_B;
+}
 void gost18977_sendByte(uint8_t byte);
 
 

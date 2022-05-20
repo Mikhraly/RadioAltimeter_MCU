@@ -11,6 +11,8 @@
 int main(void)
 {
 	ports_init();
+	uart_init();
+	gost18977_init();
 	
     while (1)
     {

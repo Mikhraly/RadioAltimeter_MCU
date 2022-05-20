@@ -7,8 +7,10 @@
 
 #include "gost18977.h"
 
-#define DELAY_US (1000000UL/(2*GOST18977_BOAD))
+#define DELAY_US ((double)(1000000UL/(2*GOST18977_BOAD)))
 
+void sendPositivePulse();
+void sendNegativePulse();
 
 void gost18977_sendByte(uint8_t byte) {
 	for (uint8_t bit = 0; bit < 8; bit++) {
