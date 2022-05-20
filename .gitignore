@@ -1,0 +1,5 @@
+.vs
+
+RadioAltimeter/Debug/
+RadioAltimeter/Release/*
+!BK/Release/*.hex
