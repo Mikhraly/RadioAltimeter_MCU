@@ -21,13 +21,15 @@
 
 
 volatile struct {	// Структура служебных флагов
-	uint8_t	recMessageOK	:1;			// Флаг успешного завершения приема сообщения
+	uint8_t	recMessageOK	:1;		// Флаг успешного завершения приема сообщения
+	uint8_t serviceability	:1;		// Исправность
+	uint8_t PUI				:1;		// РИИ - разрешение использования информации
 } flag = {0};
 
 
-volatile uint8_t tran_byte[3];				// Массив отправляемых байт
-volatile uint8_t rec_byte[7];				// Массив принимаемых байт
-volatile uint8_t buffer_word[4];			// Буфер принятого слова по ГОСТ 18977
+volatile uint8_t tran_byte[3];			// Массив отправляемых байт
+volatile uint8_t rec_byte[7];			// Массив принимаемых байт
+volatile uint8_t buffer_word[4];		// Буфер принятого слова по ГОСТ 18977
 
 // Функция передачи байта по UART через прерывание
 ISR (USART_UDRE_vect) {
@@ -58,11 +60,26 @@ ISR (USART_RXC_vect) {
 		}
 		counter = 0;
 		crc8 = 0xFF;
+		
+		flag.serviceability = rec_byte[5] * 0b01;
+		flag.PUI = (rec_byte[5] * 0b10) >> 1;
+		flag.recMessageOK = 1;
 	}
+}
+
+ISR (INT0_vect) {	// Отключение излучения
+	if (PIND & 1<<2) tran_byte[1] |= 1<<0;
+	else tran_byte[1] &= ~(1<<0);
+}
+
+ISR (INT1_vect) {	// Контроль РВ
+	if (PIND & 1<<3) tran_byte[1] |= 1<<1;
+	else tran_byte[1] &= ~(1<<1);
 }
 
 
 void ports_init();
+void checkCommandsFromBKU();
 
 
 #endif /* MAIN_H_ */

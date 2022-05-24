@@ -14,8 +14,15 @@ void sendPositivePulse();
 void sendNegativePulse();
 
 
-void gost18977_sendWord(uint8_t *word) {
+void gost18977_sendWord(uint8_t *buffer) {
+	static uint8_t word[4];
+	
+	cli();
+	for (uint8_t i=0; i<4; i++) word[i] = buffer[i];
+	sei();
+	
 	for (uint8_t i=0; i<4; i++) sendByte(word[i]);
+	
 	_delay_us(8*DELAY_US);
 }
 
