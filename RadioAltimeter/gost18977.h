@@ -24,7 +24,8 @@
 inline void gost18977_init() {
 	DDR_DATA |= 1<<PIN_DATA_A | 1<<PIN_DATA_B;
 }
-void gost18977_sendByte(uint8_t byte);
+
+void gost18977_sendWord(uint8_t *word);
 
 
 #endif /* GOST18977_H_ */

@@ -27,7 +27,7 @@ volatile struct {	// Структура служебных флагов
 
 volatile uint8_t tran_byte[3];				// Массив отправляемых байт
 volatile uint8_t rec_byte[7];				// Массив принимаемых байт
-volatile uint8_t buffer[4];					// Буфер принятого слова по ГОСТ 18977
+volatile uint8_t buffer_word[4];			// Буфер принятого слова по ГОСТ 18977
 
 // Функция передачи байта по UART через прерывание
 ISR (USART_UDRE_vect) {
@@ -54,7 +54,7 @@ ISR (USART_RXC_vect) {
 		crc8 = _crc8_ccitt_update(crc8, rec_byte[counter++]);
 	} else {
 		if (crc8 == rec_byte[6]) {
-			for (uint8_t i=0; i<4; i++) buffer[i] = rec_byte[i+1];
+			for (uint8_t i=0; i<4; i++) buffer_word[i] = rec_byte[i+1];
 		}
 		counter = 0;
 		crc8 = 0xFF;

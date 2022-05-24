@@ -9,10 +9,17 @@
 
 #define DELAY_US ((double)(1000000UL/(2*GOST18977_BOAD)))
 
+void sendByte(uint8_t byte);
 void sendPositivePulse();
 void sendNegativePulse();
 
-void gost18977_sendByte(uint8_t byte) {
+
+void gost18977_sendWord(uint8_t *word) {
+	for (uint8_t i=0; i<4; i++) sendByte(word[i]);
+	_delay_us(8*DELAY_US);
+}
+
+void sendByte(uint8_t byte) {
 	for (uint8_t bit = 0; bit < 8; bit++) {
 		if (byte & 1<<bit) sendPositivePulse();
 		else sendNegativePulse();

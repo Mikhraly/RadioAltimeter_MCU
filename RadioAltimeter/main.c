@@ -17,11 +17,12 @@ int main(void)
     while (1)
     {
 		
-		uint8_t gost18977_word[4];
+		static uint8_t gost18977_word[4];
 		asm("cli");
-		for (uint8_t i=0; i<4; i++) gost18977_word[i] = buffer[i];
+		for (uint8_t i=0; i<4; i++)
+			gost18977_word[i] = buffer_word[i];
 		asm("sei");
-		for (uint8_t i=0; i<4; i++) gost18977_sendByte(gost18977_word[i]);
+		gost18977_sendWord(gost18977_word);
 		
     }
 }
