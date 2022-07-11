@@ -21,7 +21,7 @@ int main(void)
     {
 		checkCommandsFromBKU();
 		
-		if (flag.recMessageOK) {
+		if (flag.recMessageOK) { // Начнет работать в бесконечном цикле после приема первого сообщения
 			if (flag.serviceability) PORTA |= 1<<2;
 			else PORTA &= ~(1<<2);
 			

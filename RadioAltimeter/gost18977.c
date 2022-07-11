@@ -7,7 +7,7 @@
 
 #include "gost18977.h"
 
-#define DELAY_US ((double)(1000000UL/(2*GOST18977_BOAD)))
+#define DELAY_US ((double)(1000000UL/(2*GOST18977_BOAD))) // Длительность половины бита
 
 void sendByte(uint8_t byte);
 void sendPositivePulse();

@@ -16,7 +16,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#define GOST18977_BOAD 48000UL
+#define GOST18977_BOAD 50000UL
 #define DDR_DATA DDRA
 #define PORT_DATA PORTA
 #define PIN_DATA_A 0
