@@ -27,7 +27,7 @@ volatile struct {	// Структура служебных флагов
 } flag = {0};
 
 
-volatile uint8_t tran_byte[3];			// Массив отправляемых байт
+volatile uint8_t tran_byte[3] = {0x7E};	// Массив отправляемых байт
 volatile uint8_t rec_byte[7];			// Массив принимаемых байт
 volatile uint8_t buffer_word[4];		// Буфер принятого слова по ГОСТ 18977
 
@@ -35,6 +35,7 @@ volatile uint8_t buffer_word[4];		// Буфер принятого слова по ГОСТ 18977
 ISR (USART_UDRE_vect) {
 	static volatile uint8_t counter = 0;
 	static volatile uint8_t crc8 = 0xFF;
+	
 	if (counter < 2) {
 		UDR = tran_byte[counter];
 		crc8 = _crc8_ccitt_update(crc8, tran_byte[counter++]);

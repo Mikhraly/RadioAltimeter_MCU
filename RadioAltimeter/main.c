@@ -62,13 +62,13 @@ void ports_init() {
 }
 
 void checkCommandsFromBKU() {
-	if (PIND & 1<<2) tran_byte[1] |= 1<<0;
+	if (PIND & 1<<2) tran_byte[1] |= 1<<0;	// Откл. излучения
 	else tran_byte[1] &= ~(1<<0);
 	
-	if (PIND & 1<<3) tran_byte[1] |= 1<<1;
+	if (PIND & 1<<3) tran_byte[1] |= 1<<1;	// Контроль РВ
 	else tran_byte[1] &= ~(1<<1);
 	
-	if (PIND & 1<<4) tran_byte[1] |= 1<<2;
+	if (PINB & 1<<2) tran_byte[1] |= 1<<2;	// Запрет теста
 	else tran_byte[1] &= ~(1<<2);
 }
 //////////////////////////////////////////////////////////////////////////
