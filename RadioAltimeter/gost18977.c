@@ -14,7 +14,7 @@ void sendPositivePulse();
 void sendNegativePulse();
 
 
-void gost18977_sendWord(uint8_t *buffer) {
+void gost18977_sendWord(volatile uint8_t *buffer) {
 	static uint8_t word[4];
 	
 	cli();
