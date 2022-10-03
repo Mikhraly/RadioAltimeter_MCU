@@ -53,12 +53,12 @@ void ports_init() {
 	PORTD = 0xFF;
 	
 	// Режим работы внешних прерываний INT0, INT1 по любому фронту
-	MCUCR &= ~(1<<ISC11) & (1<<ISC01);
-	MCUCR |= 1<<ISC10 | 1<<ISC00;
+	// MCUCR &= ~(1<<ISC11) & (1<<ISC01);
+	// MCUCR |= 1<<ISC10 | 1<<ISC00;
 	// Режим работы внешнего прерывания INT2 по заднему фронту
-	/*MCUCSR &= ~(1<<ISC2);*/
+	// MCUCSR &= ~(1<<ISC2);
 	// Включить внешние прерывания INT0, INT1
-	GICR |= 1<<INT0 | 1<<INT1;	
+	// GICR |= 1<<INT0 | 1<<INT1;	
 }
 
 void checkCommandsFromBKU() {
@@ -68,7 +68,7 @@ void checkCommandsFromBKU() {
 	if (PIND & 1<<3) tran_byte[1] |= 1<<1;	// Контроль РВ
 	else tran_byte[1] &= ~(1<<1);
 	
-	if (PINB & 1<<2) tran_byte[1] |= 1<<2;	// Запрет теста
+	if (PIND & 1<<4) tran_byte[1] |= 1<<2;	// Запрет теста
 	else tran_byte[1] &= ~(1<<2);
 }
 //////////////////////////////////////////////////////////////////////////

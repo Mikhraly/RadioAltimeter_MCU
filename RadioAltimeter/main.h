@@ -68,16 +68,15 @@ ISR (USART_RXC_vect) {
 	}
 }
 
-/*
-ISR (INT0_vect) {	// Отключение излучения
-	if (PIND & 1<<2) tran_byte[1] |= 1<<0;
-	else tran_byte[1] &= ~(1<<0);
-}
-ISR (INT1_vect) {	// Контроль РВ
-	if (PIND & 1<<3) tran_byte[1] |= 1<<1;
-	else tran_byte[1] &= ~(1<<1);
-}
-*/
+// ISR (INT0_vect) {	// Отключение излучения
+// 	if (PIND & 1<<2) tran_byte[1] |= 1<<0;
+// 	else tran_byte[1] &= ~(1<<0);
+// }
+// ISR (INT1_vect) {	// Контроль РВ
+// 	if (PIND & 1<<3) tran_byte[1] |= 1<<1;
+// 	else tran_byte[1] &= ~(1<<1);
+// }
+
 
 void ports_init();
 void checkCommandsFromBKU();
